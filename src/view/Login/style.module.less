@@ -1,0 +1,134 @@
+.page_login_home {
+    height: 100vh;
+
+    .page_cell_head {
+        height: 11.5%;
+    }
+
+    .page_cell_content {
+        height: 77%;
+        background-image: url(http://sys.lsxjy.com.cn/images/login/bg09.jpg);
+        background-size: cover;
+        position: relative;
+
+        .page_cell_login {
+            width: 339px;
+            height: 333px;
+            position: absolute;
+            right: 10%;
+            background: #fff;
+            box-shadow: 0px 0px 6px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            //切换按钮
+            .page_cell_changeBut {
+                height: 60px;
+                width: 60px;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                background-color: rgb(68, 125, 6);
+
+                .loginZxj,
+                .Web_login_03 {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            //账号登录
+            .page_cell_account {
+                overflow: hidden;
+                padding: 0 15px;
+                height: 100%;
+                .account_cell_title {
+                    margin: 15px 0;
+                    font-size: 18px;
+                    color: black;
+                    font-weight: 600;
+                }
+                .error_msg{
+                    color: red;
+                    margin-bottom: 20px;
+                }
+                :global {
+                    .input_content{
+                        .ant-input {
+                            margin-top: 20px;
+                         }
+                    }
+
+
+                    .ant-btn {
+                        width: fit-content;
+                        margin: 0 auto;
+                        display: block;
+                    }
+                }
+
+                .account_midder {
+                    margin: 30px auto 0;
+                    display: block;
+                    background: #007e43;
+                }
+
+                .after_tips {
+                    /deep/.el_input__inner {
+                        border-color: red;
+                    }
+
+                    &::after {
+                        content: attr(data_tips);
+                        color: red;
+                    }
+                }
+            }
+
+            //二维码登录
+            .page_cell_qr {
+                .page_cell_qrtitle {
+                    padding-top: 15px;
+                    text-align: center;
+                    font-size: 18px;
+                    color: black;
+                    font-weight: 600;
+                }
+
+                .page__cell_qrImg {
+                    width: 200px;
+                    height: 200px;
+                    margin: 15px auto 0;
+                    position: relative;
+
+                    >img {
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    .page_cell_reload_img {
+                        width: 20px;
+                        height: 20px;
+                        // background_image: url(../../assets/images/channel_current.png);
+                        background-color: #007e43;
+                        background-size: 100%;
+                        position: absolute;
+                        right: -40px;
+                        top: 20px;
+                        cursor: pointer;
+                    }
+                }
+
+                .page_cell_time {
+                    text-align: center;
+                    margin-top: 15px;
+                }
+            }
+        }
+    }
+
+    .page_cell_floot {
+        height: 11.5%;
+    }
+}
