@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import style from '../style/logo.module.less';
+import style from '../less/logo.module.less';
 import { Link } from "react-router-dom";
 import { natType as natTypeContext } from '../index';
 

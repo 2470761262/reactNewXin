@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Menu } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
-import style from '../style/menu.module.less';
+import style from '../less/menu.module.less';
 import { natType as natTypeContext } from '../index';
 
 

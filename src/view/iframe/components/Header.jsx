@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import style from '../style/header.module.less';
+import style from '../less/header.module.less';
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined

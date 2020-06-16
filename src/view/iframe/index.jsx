@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Menu from './components/Menu';
 import Header from './components/Header';
 import Logo from './components/Logo';
-import style from './style/style.module.less';
+import style from './less/style.module.less';
 
 export const natType = React.createContext(false);
 
