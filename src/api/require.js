@@ -13,7 +13,7 @@ let http = axios.create({
 // 请求拦截器
 http.interceptors.request.use(
   function(config) {
-
+    config.headers.tk = localStorage.getItem("login") ? JSON.parse(localStorage.getItem( "login")).token.token : '';
     return config;
   },
   function(error) {

@@ -56,18 +56,25 @@ function Login (props) {
                 return;
             }
             setErrorFields({})
-            notification.success({
-                message: '成功喽',
-                description:
-                    '阿sir,一切正常!',
-            });
+            
 
-            getUserMessage();
+            getUserMessage().then((e)=>{
+                console.log(e,"eeeeeeee");
+                if(e.code === 200){
+                    localStorage.setItem("login",JSON.stringify(e.data));
+                    notification.success({
+                        message: '成功喽',
+                        description:
+                            '阿sir,一切正常!',
+                    });
+                    props.history.push({pathname:'iframe'});
+                }
+            });
         });
     }
 
     function getUserMessage () {
-        api.post({
+      return  api.post({
             url: "/loginManager/pcLogin",
             data: {
                 clientId: 0,
@@ -79,7 +86,7 @@ function Login (props) {
             headers: { "Content-Type": "application/json;charset=UTF-8" }
         })
             .then(e => {
-                props.history.push({pathname:'iframe'});
+                return e.data;
             })
             .catch(e => {
                 console.log("【【【【uups,登录失败】】】】");

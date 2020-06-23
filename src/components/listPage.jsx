@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import style from './less/listPage.module.less';
 
 const ListPage = (props) => {
-    const { header, left, nav, columns, data } = props;
+    const { header, left, nav, columns, data,key = "id" } = props;
 
     return (
 
@@ -18,7 +18,7 @@ const ListPage = (props) => {
                 }
                 <div className={style.list_page_right}>
 
-                    <Table columns={columns} dataSource={data} />
+                    <Table columns={columns} dataSource={data}  rowKey={key}/>
 
                 </div>
                 {

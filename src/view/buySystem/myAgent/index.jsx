@@ -1,53 +1,183 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import ListPage from '../../../components/listPage';
+import api from '@/api/require';
 
-
-function useTableData (defaultArray = []){
-    const [array ,setArrar] =  useState(defaultArray);
+function useTableData (defaultArray = []) {
+    const [array, setArrar] = useState(defaultArray);
 
     return [
         array,
         setArrar
     ]
 }
-export default ()=>{
-    const [columns] =  useTableData(
+export default () => {
+    const [columns] = useTableData(
         [
-           
             {
+                dataIndex: "houseNo",
                 title: "房源编号",
                 width: "170",
-                dataIndex: 'houseNo',
-              },
-              {
+            },
+            {
                 dataIndex: "communityName",
                 title: "小区名称",
                 width: "150",
-              },
-              {
+            },
+            {
                 dataIndex: "buildingName",
                 title: "楼栋号",
                 width: "90",
-              },
+            },
+            {
+                dataIndex: "roomNo",
+                title: "房间号",
+                width: "110"
+            },
+            {
+                dataIndex: "inArea",
+                title: "面积(m²)",
+                width: "110"
+                //   formart: item => item.inArea + "m²"
+            },
+            {
+                dataIndex: "price",
+                title: "售价(万元)",
+                width: "120"
+                //      formart: item => item.price + "万元"
+            },
+            {
+                dataIndex: "unitPrice",
+                title: "单价(元/㎡)",
+                width: "130"
+                //  format: item => item.unitPrice + "元/㎡"
+            },
+            {
+                dataIndex: "seenNum",
+                label: "被看次数",
+                width: "120"
+            },
+            {
+                dataIndex: "outfollow",
+                title: "未跟进天数",
+                width: "120"
+
+            },
+            // {
+            //     dataIndex: "noSeenDay",
+            //     title: "未被看天数",
+            //     width: "120"
+            // },
+            // {
+            //     dataIndex: "addTime",
+            //     title: "添加时间",
+            //     width: "120",
+            // },
+            {
+                dataIndex: "agentName",
+                title: "跟单人",
+                width: "120"
+            },
+            {
+                dataIndex: "houseType",
+                title: "户型",
+                width: "150",
+                // order: false,
+                // disabled: false,
+                // default: true,
+                // formart: item =>
+                //   (item.rooms || 0) +
+                //   "室" +
+                //   (item.hall || 0) +
+                //   "厅" +
+                //   (item.toilet || 0) +
+                //   "卫"
+            },
+            {
+                dataIndex: "face",
+                title: "朝向",
+                width: "120",
+
+            },
+            {
+                dataIndex: "floor",
+                title: "楼层",
+                width: "120",
+
+            },
+            {
+                dataIndex: "decoration",
+                title: "装修",
+                width: "120",
+
+            },
+            {
+                dataIndex: "addName",
+                title: "添加人",
+                width: "120",
+
+            }
         ]
     );
-    const [data ] =  useTableData(
-        [ {id: 119615, houseNo: "X+CS433168509267275776", communityName: "南城自建房", comId: 1},
-        {id: 119614, houseNo: "X+CS432870847070531584", communityName: "龙门自建房", comId: 6},
-        {id: 119613, houseNo: "X+CS432859652481544192", communityName: "龙地华府", comId: 5, buildingName: "3"},
-        {id: 119612, houseNo: "X+CS432858610394132480", communityName: "龙地华府", comId: 5, buildingName: "2"},
-        {id: 119611, houseNo: "X+CS432795439054647296", communityName: "北大·燕园一期", comId: 7, buildingName: "2"},
-        {id: 119610, houseNo: "X+CS432802994149584896", communityName: "龙地华府", comId: 5, buildingName: "1"},
-        {id: 119608, houseNo: "X+CS431264763507568640", communityName: "晟龙.阳光美地", comId: 21, buildingName: "1"},
-        {id: 119606, houseNo: "X+CS431260675097161728", communityName: "天龙富贵城", comId: 270, buildingName: "单"},
-        {id: 119605, houseNo: "X+CS431253618495254528", communityName: "龙厦铁路安置小区(小洋)", comId: 289},
-        {id: 119604, houseNo: "X+CS430865786358394880", communityName: "南城自建房", comId: 1}]
-    );
+    const [data, setData] = useTableData([]);
+
+    useEffect(() => {
+       
+         getData().then((e)=>{
+             setData(e);
+             console.log(e);
+        //     console.log(e);
+         })
+
+    //// eslint-disable-next-line react-hooks/exhaustive-deps
+    },[setData])
+
+    function getData () {
+        return api.post({
+            url: "/myHouse/getMyAgent",
+            data: {
+                agentName: "",
+                cbId: "",
+                comId: "",
+                customName: "",
+                houseNo: "",
+                isKey: "",
+                isOnly: "",
+                limit: 5,
+                maxInArea: "",
+                maxPrice: "",
+                minInArea: "",
+                minPrice: "",
+                page: 1,
+                roomNo: "",
+                sortColumn: "id",
+                sortType: "descending",
+                tel: "",
+                treeAccount: "",
+                treeCompany: "",
+                treeDepartment: ""
+            },
+            headers: { "Content-Type": "application/json;charset=UTF-8" }
+        })
+            .then(e => {
+                if(e.data.code === 200){
+                   return e.data.data.data;
+                }
+                else
+                    return [];
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+
+
     return (
         <div>
-            
-            <ListPage 
+
+            <ListPage
                 columns={columns}
+                rowKey="id"
                 data={data}>
             </ListPage>
         </div>
